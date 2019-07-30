@@ -6,9 +6,12 @@ Rails.application.routes.draw do
     post "/login", to: "sessions#create"
     post "/signup", to: "users#create"
     delete "/logout", to: "sessions#destroy"
+    get "/search-results", to: "search_results#show_results"
     get "/rooms", to: "static_pages#room"
     resources :users
-    resources :hotels
+    resources :hotels do
+      resources :rooms
+    end
     resources :password_resets, only: %i(new create edit update)
     resources :account_activations, only: :edit
   end
